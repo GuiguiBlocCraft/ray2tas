@@ -6,9 +6,6 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ray2Mod">
-      <HintPath>..\Ray2Mod\Ray2Mod.dll</HintPath>
-    </Reference>
     <Reference Include="MemoryToolKit">
       <HintPath>Resources\MemoryToolKit.dll</HintPath>
     </Reference>

@@ -1,5 +1,4 @@
 ﻿using Nefarius.ViGEm.Client;
-using Ray2Tas.Controller;
 
 namespace Ray2Tas;
 
@@ -13,8 +12,7 @@ class Program
 		Game Game = new();
 		Tas Tas = new();
 
-		// string fileName = args[0];
-		string fileName = "test.txt";
+		string fileName = args[0];
 
 		// Read file
 		Tas.ReadFile(fileName);
@@ -35,8 +33,6 @@ class Program
 					Tas.Started = true;
 				}
 
-				// Game.Loop();
-
 				if(!Game.IsLoading() && Tas.Started)
 					Tas.Loop();
 			}
@@ -48,7 +44,7 @@ class Program
 				Console.WriteLine("XBox360 controller disconnected!");
 			}
 
-			Thread.Sleep(16);
+			Thread.Sleep(16); // 60 fps, to improve
 		}
 	}
 }
