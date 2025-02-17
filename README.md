@@ -1,6 +1,6 @@
 # 🕹️ Ray2Tas 🤖
 
-A proof of concept for a *Tool Assisted Speedrun* on **Rayman 2** (__PC version only__).
+A proof of concept for a *Tool Assisted Speedrun* on **Rayman 2** (<ins>PC version only</ins>).
 
 
 ## How does it works?
