@@ -20,8 +20,7 @@ internal class Game
 			OnHook = () =>
 			{
 				InitPointers();
-			},
-			// OnExit = () => Hooked = false
+			}
 		};
 	}
 

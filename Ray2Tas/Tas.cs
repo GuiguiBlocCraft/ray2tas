@@ -6,10 +6,11 @@ class Tas
 {
 	private readonly OutputControllerXbox360 out_xbox = new();
 
-	private List<OutputControllerXbox360InputState> InputLines = new();
+	private readonly List<OutputControllerXbox360InputState> InputLines = new();
 	private int Tick = 0;
 
 	public bool Started { get; set; }
+	public bool Writed { get; set; }
 
 	public void ReadFile(string fileName)
 	{
@@ -63,7 +64,7 @@ class Tas
 			Reset();
 			Console.WriteLine("Done!");
 		}
-		else
+		else if(!Writed)
 		{
 			// Send input
 			out_xbox.UpdateInput(InputLines[Tick]);
@@ -71,6 +72,17 @@ class Tas
 
 			Tick++;
 		}
+		else
+		{
+			// Write input
+			//TODO
+		}
+	}
+
+	public void Start()
+	{
+		Tick = 0;
+		Started = true;
 	}
 
 	public void Reset()

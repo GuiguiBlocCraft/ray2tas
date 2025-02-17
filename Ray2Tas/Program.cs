@@ -5,18 +5,28 @@ namespace Ray2Tas;
 class Program
 {
     public static ViGEmClient emClient = new();
-	private static bool Hooked = false;
+	private static bool GameStarted = false;
 
-	static void Main(string[] args)
+	static int Main(string[] args)
 	{
 		Game Game = new();
 		Tas Tas = new();
+		NetServer net = new(Tas);
+
+		if(args.Length == 0)
+		{
+			Console.WriteLine("Usage: ray2tas.exe FILENAME");
+			return 1;
+		}
 
 		string fileName = args[0];
 
 		// Read file
 		Tas.ReadFile(fileName);
 		Console.WriteLine($"File {fileName} readed!");
+
+		// Start server to starting TAS remotely
+		net.Start("0.0.0.0", 4444);
 
 		// Loop
 		while(true)
@@ -25,26 +35,26 @@ class Program
 
 			if(Game.IsHooked())
 			{
-				if(!Hooked) {
-					Hooked = true;
-					Tas.ConnectController();
-					Console.WriteLine("XBox360 controller connected!");
+				if(!GameStarted) {
+					GameStarted = true;
+					Console.WriteLine("Rayman2 started!");
 
-					Tas.Started = true;
+					Tas.ConnectController();
 				}
 
 				if(!Game.IsLoading() && Tas.Started)
 					Tas.Loop();
 			}
-			else if(Hooked)
+			else if(GameStarted)
 			{
-				Hooked = false;
+				GameStarted = false;
+				Console.WriteLine("Rayman2 stopped!");
+
 				Tas.Reset();
 				Tas.DisconnectController();
-				Console.WriteLine("XBox360 controller disconnected!");
 			}
 
-			Thread.Sleep(16); // 60 fps, to improve
+			Thread.Sleep(16); // 60 fps, can be improved
 		}
 	}
 }
